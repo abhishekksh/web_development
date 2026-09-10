@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="title desc">
+
+    <title id="title">
+        Library books
+    </title>
+
+    <desc id="desc">
+        A collection of colourful books on a library shelf.
+    </desc>
+
+    <rect width="600" height="400" rx="30" fill="#eeeeee"></rect>
+
+
+    <!-- Shelf -->
+
+    <rect x="60" y="300" width="480" height="25" rx="5" fill="#9a6646"></rect>
+
+
+    <!-- Books -->
+
+    <rect x="100" y="105" width="70" height="195" rx="5" fill="#168e91"></rect>
+
+    <rect x="180" y="145" width="65" height="155" rx="5" fill="#d2ed4e"></rect>
+
+    <rect x="255" y="85" width="75" height="215" rx="5" fill="#e4a64f"></rect>
+
+    <rect x="340" y="125" width="65" height="175" rx="5" fill="#7bbfc5"></rect>
+
+    <rect x="415" y="100" width="75" height="200" rx="5" fill="#8bcf87"></rect>
+
+
+    <!-- Book details -->
+
+    <line x1="115" y1="135" x2="155" y2="135" stroke="#ffffff" stroke-width="7"></line>
+
+    <line x1="195" y1="175" x2="230" y2="175" stroke="#ffffff" stroke-width="7"></line>
+
+    <line x1="272" y1="115" x2="312" y2="115" stroke="#ffffff" stroke-width="7"></line>
+
+    <line x1="355" y1="155" x2="390" y2="155" stroke="#ffffff" stroke-width="7"></line>
+
+    <line x1="430" y1="130" x2="475" y2="130" stroke="#ffffff" stroke-width="7"></line>
+
+
+    <!-- Book icon -->
+
+    <path d="M220 55
+           Q300 25 380 55
+           V75
+           Q300 45 220 75
+           Z" fill="#ffffff"></path>
+
+    <path d="M300 48 V72" stroke="#168e91" stroke-width="4"></path>
+
+</svg>

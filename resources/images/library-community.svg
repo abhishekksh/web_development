@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" role="img" aria-labelledby="title desc">
+
+    <title id="title">
+        Library community
+    </title>
+
+    <desc id="desc">
+        People learning and connecting in a public library.
+    </desc>
+
+    <rect width="600" height="400" rx="30" fill="#eeeeee"></rect>
+
+
+    <!-- Background table -->
+
+    <rect x="90" y="270" width="420" height="25" rx="8" fill="#a66f4d"></rect>
+
+
+    <!-- Person 1 -->
+
+    <circle cx="180" cy="140" r="38" fill="#f1b48b"></circle>
+
+    <path d="M140 145 Q145 95 180 100 Q215 100 220 145" fill="#d87543"></path>
+
+    <path d="M150 185
+           Q180 160 210 185
+           L220 270
+           L140 270
+           Z" fill="#168e91"></path>
+
+
+    <!-- Person 2 -->
+
+    <circle cx="300" cy="125" r="40" fill="#f1b48b"></circle>
+
+    <path d="M258 130 Q260 75 300 80 Q345 80 342 135" fill="#6d4c41"></path>
+
+    <path d="M265 175
+           Q300 150 335 175
+           L350 270
+           L250 270
+           Z" fill="#d2ed4e"></path>
+
+
+    <!-- Person 3 -->
+
+    <circle cx="425" cy="145" r="38" fill="#f1b48b"></circle>
+
+    <path d="M385 145 Q390 95 425 100 Q460 100 465 145" fill="#805b40"></path>
+
+    <path d="M395 185
+           Q425 160 455 185
+           L465 270
+           L385 270
+           Z" fill="#78b8c3"></path>
+
+
+    <!-- Book -->
+
+    <rect x="260" y="235" width="80" height="35" rx="3" fill="#ffffff"></rect>
+
+    <line x1="300" y1="235" x2="300" y2="270" stroke="#168e91" stroke-width="3"></line>
+
+</svg>

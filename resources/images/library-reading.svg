@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 500" role="img" aria-labelledby="title desc">
+
+    <title id="title">
+        Person reading in a library
+    </title>
+
+    <desc id="desc">
+        An illustration of a person sitting in a chair reading a book.
+    </desc>
+
+    <rect width="600" height="500" rx="30" fill="#eeeeee"></rect>
+
+    <!-- Bookshelf -->
+
+    <rect x="55" y="70" width="170" height="290" rx="8" fill="#ffffff"></rect>
+
+    <rect x="75" y="100" width="130" height="15" fill="#168e91"></rect>
+
+    <rect x="75" y="145" width="90" height="15" fill="#d2ed4e"></rect>
+
+    <rect x="170" y="145" width="35" height="15" fill="#78b7c1"></rect>
+
+    <rect x="75" y="190" width="130" height="15" fill="#e7b65b"></rect>
+
+    <rect x="75" y="235" width="75" height="15" fill="#168e91"></rect>
+
+    <rect x="155" y="235" width="50" height="15" fill="#d2ed4e"></rect>
+
+    <rect x="75" y="280" width="130" height="15" fill="#7bc58d"></rect>
+
+
+    <!-- Chair -->
+
+    <path d="M255 290
+           Q270 250 330 255
+           L425 275
+           Q455 285 455 330
+           L435 400
+           L290 400
+           Q260 370 255 290" fill="#a66f4d"></path>
+
+    <path d="M285 390 L270 455" stroke="#6c4935" stroke-width="12"></path>
+
+    <path d="M420 390 L440 455" stroke="#6c4935" stroke-width="12"></path>
+
+
+    <!-- Person -->
+
+    <circle cx="350" cy="155" r="52" fill="#f1b48b"></circle>
+
+    <!-- Hair -->
+
+    <path d="M300 160
+           Q295 90 350 80
+           Q410 85 405 160
+           L390 200
+           L310 200
+           Z" fill="#df7745"></path>
+
+
+    <!-- Body -->
+
+    <path d="M310 205
+           Q350 185 390 205
+           L425 285
+           L305 285
+           Z" fill="#e9ca55"></path>
+
+
+    <!-- Legs -->
+
+    <path d="M325 275 L390 275 L420 375 L370 375 Z" fill="#4e88a4"></path>
+
+    <path d="M370 375 L420 375 L450 420 L395 420 Z" fill="#4e88a4"></path>
+
+
+    <!-- Laptop/book -->
+
+    <path d="M300 255
+           L390 255
+           L410 305
+           L285 305
+           Z" fill="#777777"></path>
+
+    <rect x="305" y="260" width="78" height="35" fill="#d9e5e8"></rect>
+
+
+    <!-- Arms -->
+
+    <path d="M315 215
+           Q300 245 330 270" stroke="#f1b48b" stroke-width="18" fill="none" stroke-linecap="round"></path>
+
+    <path d="M390 215
+           Q410 245 380 270" stroke="#f1b48b" stroke-width="18" fill="none" stroke-linecap="round"></path>
+
+
+    <!-- Face -->
+
+    <circle cx="332" cy="150" r="4" fill="#222222"></circle>
+
+    <circle cx="370" cy="150" r="4" fill="#222222"></circle>
+
+    <path d="M342 170 Q350 177 358 170" stroke="#333333" stroke-width="3" fill="none"></path>
+
+</svg>
