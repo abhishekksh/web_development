@@ -2506,3 +2506,28 @@ ul {
     }
 
 }
+
+
+/* Admin book management actions (add/edit/delete) */
+
+.book-actions {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.book-actions form {
+    display: inline;
+}
+
+.btn-danger {
+    background: #b3261e;
+
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background: #8c1d17;
+}

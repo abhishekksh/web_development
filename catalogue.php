@@ -8,70 +8,16 @@ $pageDescription =
 
 /*
 |--------------------------------------------------------------------------
-| Sample Catalogue Data
+| Catalogue Data
 |--------------------------------------------------------------------------
-| This is layout/demo data for Member 1.
-| Member 2 can later connect this page to the MySQL database.
+| Member 2: loaded from the books table instead of the earlier demo array.
 |--------------------------------------------------------------------------
 */
 
-$books = [
+require 'includes/db.php';
 
-    [
-        "title" => "The Great Adventure",
-        "author" => "Emily Carter",
-        "category" => "Fiction",
-        "year" => 2024,
-        "status" => "Available",
-        "image" => "resources/images/book1.jpeg"
-    ],
-
-    [
-        "title" => "Learning Through Discovery",
-        "author" => "James Wilson",
-        "category" => "Education",
-        "year" => 2023,
-        "status" => "Available",
-        "image" => "resources/images/book2.jpeg"
-    ],
-
-    [
-        "title" => "The World Around Us",
-        "author" => "Sarah Brown",
-        "category" => "Children",
-        "year" => 2022,
-        "status" => "Available",
-        "image" => "resources/images/book3.jpeg"
-    ],
-
-    [
-        "title" => "Digital Skills for Everyone",
-        "author" => "Michael Smith",
-        "category" => "Technology",
-        "year" => 2024,
-        "status" => "Borrowed",
-        "image" => "resources/images/book4.jpeg"
-    ],
-
-    [
-        "title" => "Stories Under the Stars",
-        "author" => "Olivia Martin",
-        "category" => "Fiction",
-        "year" => 2021,
-        "status" => "Available",
-        "image" => "resources/images/book5.jpeg"
-    ],
-
-    [
-        "title" => "Introduction to Science",
-        "author" => "Daniel Taylor",
-        "category" => "Education",
-        "year" => 2023,
-        "status" => "Available",
-        "image" => "resources/images/book6.jpeg"
-    ]
-
-];
+$stmt = $conn->query("SELECT * FROM books ORDER BY book_id");
+$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 
 /*
