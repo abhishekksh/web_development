@@ -2,7 +2,7 @@
 
 $servername = "sql212.infinityfree.com";
 $username = "if0_42890633";
-$password = "YOUR_VPANEL_PASSWORD";
+$password = "b1PGqHv3zpH";
 $dbname = "if0_42890633_library";
 
 try {
