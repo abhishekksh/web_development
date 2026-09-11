@@ -2,17 +2,20 @@
 
 session_start();
 
+require "includes/db.php";
+
 $pageTitle = "Login | Logan Public Library";
 
 $email = "";
 $emailErr = "";
 $passwordErr = "";
-$loginMessage = "";
+$loginErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $email = trim($_POST["email"]);
-    $password = $_POST["password"];
+    $email = trim($_POST["email"] ?? "");
+    $password = $_POST["password"] ?? "";
+
 
     // Email validation
     if (empty($email)) {
@@ -33,30 +36,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $passwordErr = "Password is required.";
 
     }
-    elseif (strlen($password) < 8) {
-
-        $passwordErr =
-            "Password must be at least 8 characters.";
-
-    }
 
 
-    // Temporary message until database is connected
-   if (
-    empty($emailErr) &&
-    empty($passwordErr)
+    // Continue if validation passed
+    if (
+        empty($emailErr) &&
+        empty($passwordErr)
     ) {
 
-    // Temporary session for testing
-    // This will be replaced with database authentication later
+        // Find user by email
+        $stmt = $conn->prepare(
+            "SELECT *
+             FROM users
+             WHERE email = :email"
+        );
 
-    $_SESSION["user_id"] = 1;
-    $_SESSION["name"] = "Test Member";
-    $_SESSION["email"] = $email;
-    $_SESSION["role"] = "member";
+        $stmt->execute([
+            ":email" => $email
+        ]);
 
-    header("Location: member-dashboard.php");
-    exit;
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        // Check user and password
+        if (
+            $user &&
+            password_verify(
+                $password,
+                $user["password"]
+            )
+        ) {
+
+            // Store real user details in session
+            $_SESSION["user_id"] =
+                $user["user_id"];
+
+            $_SESSION["name"] =
+                $user["first_name"] . " " .
+                $user["last_name"];
+
+            $_SESSION["email"] =
+                $user["email"];
+
+            $_SESSION["role"] =
+                $user["role"];
+
+
+            // Redirect based on role
+            if ($user["role"] == "admin") {
+
+                header("Location: add-book.php");
+
+            }
+            else {
+
+                header(
+                    "Location: member-dashboard.php"
+                );
+
+            }
+
+            exit;
+
+        }
+        else {
+
+            $loginErr =
+                "Invalid email or password.";
+
+        }
 
     }
 
@@ -153,20 +201,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </a>
                 </li>
 
-                <li>
-                    <a href="login.php"
-                       class="active"
-                       aria-current="page">
-                        Login
-                    </a>
-                </li>
+                <?php if (isset($_SESSION["user_id"])): ?>
 
-                <li>
-                    <a href="register.php"
-                       class="nav-register">
-                        Register
-                    </a>
-                </li>
+                    <?php if (($_SESSION["role"] ?? "") === "admin"): ?>
+
+                        <li>
+                            <a href="add-book.php">
+                                Manage Books
+                            </a>
+                        </li>
+
+                    <?php else: ?>
+
+                        <li>
+                            <a href="member-dashboard.php">
+                                My Account
+                            </a>
+                        </li>
+
+                    <?php endif; ?>
+
+                    <li>
+                        <a href="logout.php"
+                        class="nav-register">
+                            Logout
+                        </a>
+                    </li>
+
+                <?php else: ?>
+
+                    <li>
+                        <a href="login.php">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="register.php"
+                        class="nav-register">
+                            Register
+                        </a>
+                    </li>
+
+                <?php endif; ?>
 
             </ul>
 
@@ -201,10 +278,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <?php
 
-            if (!empty($loginMessage)) {
+            if (isset($_GET["registered"])) {
 
-                echo "<p style='color:green; font-weight:bold;'>"
-                    . $loginMessage .
+                echo "<p class='success-message'>
+                        Account created successfully.
+                        You can now log in.
+                    </p>";
+
+            }
+
+            ?>
+
+            <?php
+
+            if (!empty($loginErr)) {
+
+                echo "<p class='error-message'>"
+                    . htmlspecialchars($loginErr) .
                     "</p>";
 
             }

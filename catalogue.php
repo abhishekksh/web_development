@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 $pageTitle = "Book Catalogue | Logan Public Library";
 
 $pageDescription =
@@ -217,20 +219,49 @@ foreach ($books as $book) {
                     </a>
                 </li>
 
-                <li>
-                    <a href="login.php">
-                        Login
-                    </a>
-                </li>
+                <?php if (isset($_SESSION["user_id"])): ?>
 
-                <li>
-                    <a href="register.php"
-                       class="nav-register">
+                    <?php if (($_SESSION["role"] ?? "") === "admin"): ?>
 
-                        Register
+                        <li>
+                            <a href="add-book.php">
+                                Manage Books
+                            </a>
+                        </li>
 
-                    </a>
-                </li>
+                    <?php else: ?>
+
+                        <li>
+                            <a href="member-dashboard.php">
+                                My Account
+                            </a>
+                        </li>
+
+                    <?php endif; ?>
+
+                    <li>
+                        <a href="logout.php"
+                        class="nav-register">
+                            Logout
+                        </a>
+                    </li>
+
+                <?php else: ?>
+
+                    <li>
+                        <a href="login.php">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="register.php"
+                        class="nav-register">
+                            Register
+                        </a>
+                    </li>
+
+                <?php endif; ?>
 
             </ul>
 
@@ -485,8 +516,41 @@ foreach ($books as $book) {
                                         $book["status"]
                                     );
                                     ?>
-
+                                
                                 </span>
+                                
+                                <?php
+                                if (
+                                    isset($_SESSION["user_id"]) &&
+                                    ($_SESSION["role"] ?? "") === "member"
+                                ):
+                                ?>
+
+                                    <?php if ($book["status"] === "Available"): ?>
+
+                                        <form method="POST"
+                                            action="borrow-book.php">
+
+                                            <input type="hidden"
+                                                name="book_id"
+                                                value="<?php echo $book["book_id"]; ?>">
+
+                                            <button type="submit"
+                                                    class="btn btn-primary">
+                                                Borrow Book
+                                            </button>
+
+                                        </form>
+
+                                    <?php else: ?>
+
+                                        <p>
+                                            Currently unavailable
+                                        </p>
+
+                                    <?php endif; ?>
+
+                                <?php endif; ?>
 
                             </div>
 

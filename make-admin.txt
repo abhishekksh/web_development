@@ -1,0 +1,19 @@
+<?php
+
+require "includes/db.php";
+
+$email = "admin@library.com";
+
+$stmt = $conn->prepare(
+    "UPDATE users
+     SET role = 'admin'
+     WHERE email = :email"
+);
+
+$stmt->execute([
+    ":email" => $email
+]);
+
+echo "Admin role updated successfully.";
+
+?>

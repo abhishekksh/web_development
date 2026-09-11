@@ -1,5 +1,7 @@
 <?php
 
+require "includes/db.php";
+
 $pageTitle = "Register | Logan Public Library";
 
 $firstName = "";
@@ -14,18 +16,17 @@ $phoneErr = "";
 $passwordErr = "";
 $confirmPasswordErr = "";
 $termsErr = "";
-
-$successMessage = "";
+$databaseErr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $firstName = trim($_POST["first_name"]);
-    $lastName = trim($_POST["last_name"]);
-    $email = trim($_POST["email"]);
-    $phone = trim($_POST["phone"]);
+    $firstName = trim($_POST["first_name"] ?? "");
+    $lastName = trim($_POST["last_name"] ?? "");
+    $email = trim($_POST["email"] ?? "");
+    $phone = trim($_POST["phone"] ?? "");
 
-    $password = $_POST["password"];
-    $confirmPassword = $_POST["confirm_password"];
+    $password = $_POST["password"] ?? "";
+    $confirmPassword = $_POST["confirm_password"] ?? "";
 
 
     // First name validation
@@ -120,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
 
-    // Check whether all validation passed
+    // Continue if validation passed
     if (
         empty($firstNameErr) &&
         empty($lastNameErr) &&
@@ -131,8 +132,61 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         empty($termsErr)
     ) {
 
-        $successMessage =
-            "Registration details are valid. Database connection will be added next.";
+        // Check if email already exists
+        $stmt = $conn->prepare(
+            "SELECT user_id
+             FROM users
+             WHERE email = :email"
+        );
+
+        $stmt->execute([
+            ":email" => $email
+        ]);
+
+
+        if ($stmt->fetch()) {
+
+            $emailErr =
+                "An account with this email already exists.";
+
+        }
+        else {
+
+            // Hash password
+            $hashedPassword =
+                password_hash(
+                    $password,
+                    PASSWORD_DEFAULT
+                );
+
+
+            // Add user to database
+            $stmt = $conn->prepare(
+                "INSERT INTO users
+                (first_name, last_name, email, phone, password)
+                VALUES
+                (:first_name, :last_name, :email, :phone, :password)"
+            );
+
+
+            $stmt->execute([
+
+                ":first_name" => $firstName,
+                ":last_name" => $lastName,
+                ":email" => $email,
+                ":phone" => $phone,
+                ":password" => $hashedPassword
+
+            ]);
+
+
+            header(
+                "Location: login.php?registered=1"
+            );
+
+            exit;
+
+        }
 
     }
 

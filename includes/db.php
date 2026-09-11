@@ -32,6 +32,16 @@ try {
         role ENUM('admin', 'member') NOT NULL DEFAULT 'member',
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+
+    $conn->exec("CREATE TABLE IF NOT EXISTS borrowed_books (
+    borrow_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    book_id INT NOT NULL,
+    borrow_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (book_id) REFERENCES books(book_id)
+    )");
+    
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }

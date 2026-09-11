@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $pageTitle = "About Us | Logan Public Library";
 $pageDescription = "Learn about Logan Public Library, our services, values and commitment to learning and the community.";
 ?>
@@ -105,18 +108,49 @@ $pageDescription = "Learn about Logan Public Library, our services, values and c
                     </a>
                 </li>
 
-                <li>
-                    <a href="login.php">
-                        Login
-                    </a>
-                </li>
+                <?php if (isset($_SESSION["user_id"])): ?>
 
-                <li>
-                    <a href="register.php"
-                       class="nav-register">
-                        Register
-                    </a>
-                </li>
+                    <?php if (($_SESSION["role"] ?? "") === "admin"): ?>
+
+                        <li>
+                            <a href="add-book.php">
+                                Manage Books
+                            </a>
+                        </li>
+
+                    <?php else: ?>
+
+                        <li>
+                            <a href="member-dashboard.php">
+                                My Account
+                            </a>
+                        </li>
+
+                    <?php endif; ?>
+
+                    <li>
+                        <a href="logout.php"
+                        class="nav-register">
+                            Logout
+                        </a>
+                    </li>
+
+                <?php else: ?>
+
+                    <li>
+                        <a href="login.php">
+                            Login
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="register.php"
+                        class="nav-register">
+                            Register
+                        </a>
+                    </li>
+
+                <?php endif; ?>
 
             </ul>
 
